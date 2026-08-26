@@ -30,6 +30,9 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from dotenv import load_dotenv
+load_dotenv(APP_DIR / ".env")
+
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -81,16 +84,16 @@ DARK_SIDEBAR  = "#080B12"
 DARK_TEXT     = "#E0E6ED"
 DARK_BORDER   = "#1E2A3A"
 
-VALIDECT_HOST = "validect-email-verification-v1.p.rapidapi.com"
-VALIDECT_KEY  = "REMOVED_BY_AUTHOR"
+VALIDECT_HOST = os.environ.get("VALIDECT_HOST", "validect-email-verification-v1.p.rapidapi.com")
+VALIDECT_KEY  = os.environ.get("VALIDECT_KEY", "")
 
-OPENSKY_CLIENT_ID     = "gonisulaiman@hotmail.com-api-client"
-OPENSKY_CLIENT_SECRET = "REMOVED_BY_AUTHOR"
+OPENSKY_CLIENT_ID     = os.environ.get("OPENSKY_CLIENT_ID", "")
+OPENSKY_CLIENT_SECRET = os.environ.get("OPENSKY_CLIENT_SECRET", "")
 
-SENDGRID_API_KEY = "REMOVED_BY_AUTHOR"
-SENDGRID_SENDER_EMAIL = "noreply@cor-harp.org"
-SENDGRID_SENDER_NAME = "COR-HARP / UN OCHA"
-OTP_EXPIRY_SECONDS = 300  # 5 minutes
+SENDGRID_API_KEY      = os.environ.get("SENDGRID_API_KEY", "")
+SENDGRID_SENDER_EMAIL = os.environ.get("SENDGRID_SENDER_EMAIL", "noreply@cor-harp.org")
+SENDGRID_SENDER_NAME  = os.environ.get("SENDGRID_SENDER_NAME", "COR-HARP / UN OCHA")
+OTP_EXPIRY_SECONDS    = int(os.environ.get("OTP_EXPIRY_SECONDS", "300"))
 
 # -- HDX HAPI v2 Constants --
 HAPI_BASE_URL = "https://hapi.humdata.org/api/v2"

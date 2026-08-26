@@ -1,0 +1,66 @@
+# ============================================
+# COR-HRP Project .gitignore
+# ============================================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+eggs/
+sdist/
+wheels/
+*.whl
+
+# ---------- Virtual Environments ----------
+venv/
+.venv/
+env/
+ENV/
+.python-version
+
+# ---------- IDE / Editor ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-workspace
+*.sublime-project
+
+# ---------- Environment & Secrets ----------
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+credentials.json
+.git-secret-replacements
+
+# ---------- Data Files (too large for Git) ----------
+# Collaborators: download data files separately and place in data/
+data/
+*.gpkg
+*.csv
+*.xlsx
+*.xls
+
+# ---------- Database ----------
+*.db
+*.sqlite
+*.sqlite3
+
+# ---------- Logs & Temp ----------
+*.log
+logs/
+tmp/
+.cache/
+
+# ---------- Streamlit ----------
+.streamlit/secrets.toml
