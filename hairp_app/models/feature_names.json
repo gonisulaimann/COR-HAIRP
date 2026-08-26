@@ -1,0 +1,31 @@
+{
+  "feature_names": [
+    "conflict_events",
+    "conflict_fatalities",
+    "events_maiduguri",
+    "events_bama",
+    "events_monguno",
+    "events_ngala",
+    "events_konduga",
+    "price_maize",
+    "price_millet",
+    "price_rice",
+    "price_sorghum",
+    "ipc_phase3p_pop",
+    "ipc_pop_analyzed",
+    "ipc_phase1_pct",
+    "ipc_phase2_pct",
+    "ipc_phase3_pct",
+    "ipc_phase4_pct",
+    "ipc_phase5_pct",
+    "idp_individuals",
+    "idp_households",
+    "month_sin",
+    "month_cos",
+    "year_norm"
+  ],
+  "input_size": 23,
+  "hidden_size": 128,
+  "num_layers": 2,
+  "target_index": 0
+}
