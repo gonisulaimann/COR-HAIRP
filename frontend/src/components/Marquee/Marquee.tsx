@@ -1,13 +1,13 @@
 /**
- * Marquee.tsx — Continuous scrolling food price / data ticker.
+ * Marquee.tsx   Continuous scrolling food price / data ticker.
  *
  * TEMP-DOCS: A pure-CSS marquee that duplicates its content for seamless
  * looping. Each item has a colored dot, label, and value.
  *
  * Props:
- *   items — Array of { label, value, color } objects to display.
+ *   items   Array of { label, value, color } objects to display.
  */
-import clsx from 'clsx';
+import clsx from "clsx";
 
 interface MarqueeItem {
   label: string;
@@ -27,14 +27,17 @@ export default function Marquee({ items, className }: MarqueeProps) {
   return (
     <div
       className={clsx(
-        'animate-fade-in overflow-hidden rounded-btn border border-white/[0.06]',
-        'bg-dark-card/60 backdrop-blur-glass py-2 mb-4',
+        "animate-fade-in overflow-hidden rounded-btn border border-white/[0.06]",
+        "bg-dark-card/60 backdrop-blur-glass py-2 mb-4",
         className,
       )}
     >
-      <div className="animate-marquee flex whitespace-nowrap">
+      <div className="animate-marquee inline-flex  whitespace-nowrap">
         {doubled.map((item, i) => (
-          <span key={i} className="inline-flex items-center gap-2 px-6 text-[0.78rem] font-medium text-surface-400">
+          <span
+            key={i}
+            className="inline-flex items-center gap-2 px-6 text-[0.78rem] font-medium text-surface-400"
+          >
             <span
               className="h-1.5 w-1.5 rounded-full flex-shrink-0"
               style={{ backgroundColor: item.color }}

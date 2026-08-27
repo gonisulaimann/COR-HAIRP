@@ -1,5 +1,5 @@
 /**
- * index.css — COR-HARP global styles.
+ * index.css   COR-HARP global styles.
  *
  * TEMP-DOCS: This file contains Tailwind directives and a few custom
  * utility classes that can't be expressed purely in Tailwind config
@@ -13,6 +13,7 @@
 @layer base {
   * {
     box-sizing: border-box;
+    overflow: hidden;
     margin: 0;
     padding: 0;
   }
@@ -26,11 +27,11 @@
 @layer components {
   .leaflet-container {
     border-radius: 16px;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
   }
   .leaflet-popup-content-wrapper {
     background: #131825;
-    color: #E0E6ED;
+    color: #e0e6ed;
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 10px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);

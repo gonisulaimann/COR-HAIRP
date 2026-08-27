@@ -1,27 +1,25 @@
 /**
- * data.ts — Typed API functions for dashboard data, forecast, map, optimizer.
+ * data.ts   Typed API functions for dashboard data, forecast, map, optimizer.
  *
  * TEMP-DOCS: Each function calls a specific REST endpoint and returns
  * the typed response. The frontend components consume these directly.
  */
-import client from './client';
 import type {
-  KpiResponse,
-  ForecastRequest,
-  ForecastResponse,
-  MapMarkersResponse,
-  OptimizeRequest,
-  OptimizeResponse,
-  TelemetryResponse,
   AuditResponse,
+  ForecastResponse,
   HealthResponse,
+  KpiResponse,
+  MapMarkersResponse,
+  OptimizeResponse,
   SensitivityRow,
-} from '@/types';
+  TelemetryResponse,
+} from "@/types";
+import client from "./client";
 
 /* ── Dashboard KPIs ─────────────────────────────────────────────────── */
 
 /** Fetch summary KPI cards for the dashboard. */
-export const getKpis = (): Promise<KpiResponse> => client.get('/kpis');
+export const getKpis = (): Promise<KpiResponse> => client.get("/kpis");
 
 /* ── Forecast ───────────────────────────────────────────────────────── */
 
@@ -31,17 +29,17 @@ export const forecast = (
   horizon: number = 12,
   escalation: number = 1.0,
 ): Promise<ForecastResponse> =>
-  client.post('/forecast/borno', { lga, horizon, escalation });
+  client.post("/forecast/borno", { lga, horizon, escalation });
 
 /** Get LSTM predictions for all 5 LGAs simultaneously. */
 export const multiLgaForecast = (): Promise<Record<string, number>> =>
-  client.get('/forecast/multi-lga');
+  client.get("/forecast/multi-lga");
 
 /* ── Map ────────────────────────────────────────────────────────────── */
 
 /** Fetch map markers (regions, camps) and transit corridor lines. */
 export const getMapMarkers = (): Promise<MapMarkersResponse> =>
-  client.get('/map/markers');
+  client.get("/map/markers");
 
 /* ── Optimizer ──────────────────────────────────────────────────────── */
 
@@ -51,24 +49,26 @@ export const optimize = (
   equityWeight: number = 0.4,
   mcIterations: number = 100,
 ): Promise<OptimizeResponse> =>
-  client.post('/optimize', { n_periods: nPeriods, equity_weight: equityWeight, mc_iterations: mcIterations });
+  client.post("/optimize", {
+    n_periods: nPeriods,
+    equity_weight: equityWeight,
+    mc_iterations: mcIterations,
+  });
 
 /* ── ML Sensitivity ─────────────────────────────────────────────────── */
 
 /** Compute feature importance via LSTM perturbation analysis. */
 export const getSensitivity = (): Promise<SensitivityRow[]> =>
-  client.get('/ml/sensitivity');
+  client.get("/ml/sensitivity");
 
 /* ── System ─────────────────────────────────────────────────────────── */
 
-/** Health check — returns status and version. */
-export const getHealth = (): Promise<HealthResponse> =>
-  client.get('/health');
+/** Health check   returns status and version. */
+export const getHealth = (): Promise<HealthResponse> => client.get("/health");
 
 /** System telemetry: uptime, memory, model info, pipeline status. */
 export const getTelemetry = (): Promise<TelemetryResponse> =>
-  client.get('/telemetry');
+  client.get("/telemetry");
 
 /** Fetch the immutable audit trail. */
-export const getAuditLog = (): Promise<AuditResponse> =>
-  client.get('/audit');
+export const getAuditLog = (): Promise<AuditResponse> => client.get("/audit");

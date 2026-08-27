@@ -1,5 +1,5 @@
 /**
- * api.ts — TypeScript interfaces for every COR-HARP API response shape.
+ * api.ts   TypeScript interfaces for every COR-HARP API response shape.
  *
  * TEMP-DOCS: These types are a 1:1 mirror of the Pydantic models in
  * backend/schemas.py. If you change a response shape on the backend,
@@ -124,8 +124,8 @@ export interface MapMarker {
   name: string;
   lat: number;
   lon: number;
-  marker_type: 'hq' | 'camp' | 'conflict';
-  risk_level: 'CRITICAL' | 'HIGH' | 'MODERATE' | 'LOW';
+  marker_type: "hq" | "camp" | "conflict";
+  risk_level: "CRITICAL" | "HIGH" | "MODERATE" | "LOW";
   idp_population?: number | null;
   lstm_prediction?: number | null;
 }
