@@ -59,4 +59,4 @@ tmp/
 
 # ---------- Streamlit ----------
 .streamlit/secrets.toml
-data:/
+data/
