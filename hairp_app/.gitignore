@@ -43,13 +43,8 @@ secrets.json
 credentials.json
 .git-secret-replacements
 
-# ---------- Data Files (too large for Git) ----------
-# Collaborators: download data files separately and place in data/
-data/
+# ---------- Only truly oversized data files (100MB+) ----------
 *.gpkg
-*.csv
-*.xlsx
-*.xls
 
 # ---------- Database ----------
 *.db

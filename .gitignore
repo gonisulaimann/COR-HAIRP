@@ -1,5 +1,45 @@
 .DS_Store
-data:/grid3_nga_operational_wards_v3_0.gpkg
-data:/wfpvam_foodprices.csv
-data:/grid3_nga_operational_wards_v3_0.gpkg
-data:/wfpvam_foodprices.csv
+
+# ---------- Only truly oversized data files (100MB+) ----------
+# grid3_nga_operational_wards_v3_0.gpkg  (190MB)
+# wfpvam_foodprices.csv                   (215MB)
+*.gpkg
+
+# ---------- Secrets & Environment ----------
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+.git-secret-replacements
+
+# ---------- Database ----------
+*.db
+*.sqlite
+*.sqlite3
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# ---------- Virtual Environments ----------
+.venv/
+venv/
+
+# ---------- Frontend ----------
+frontend/node_modules/
+frontend/dist/
+
+# ---------- IDE ----------
+.vscode/
+.idea/
+Thumbs.db
+
+# ---------- Logs ----------
+*.log
+logs/
+tmp/
+.cache/
