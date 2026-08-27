@@ -1,0 +1,27 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# COR-HARP Backend — Deployment Requirements
+# Used by Azure App Service and production deployments
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Web framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+gunicorn>=21.2.0
+
+# Config & secrets
+python-dotenv>=1.0.0
+
+# System monitoring
+psutil>=5.9.0
+
+# ML / Data pipeline
+numpy>=1.24.0
+pandas>=2.0.0
+torch>=2.0.0
+scikit-learn>=1.3.0
+pulp>=2.7.0
+openpyxl>=3.1.0
+
+# HTTP & email
+requests>=2.31.0
+sendgrid>=6.11.0

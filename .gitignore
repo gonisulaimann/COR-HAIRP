@@ -1,9 +1,15 @@
+# ---------- OS ----------
 .DS_Store
+Thumbs.db
+Desktop.ini
 
-# ---------- Only truly oversized data files (100MB+) ----------
-# grid3_nga_operational_wards_v3_0.gpkg  (190MB)
-# wfpvam_foodprices.csv                   (215MB)
-*.gpkg
+# ---------- AI Tool Configs ----------
+.agents/
+.claude/
+.freebuff/
+.cursor/
+.vscode/
+.idea/
 
 # ---------- Secrets & Environment ----------
 .env
@@ -33,10 +39,16 @@ venv/
 frontend/node_modules/
 frontend/dist/
 
-# ---------- IDE ----------
-.vscode/
-.idea/
-Thumbs.db
+# ---------- Deployment Artifacts ----------
+*.zip
+*.tar.gz
+deploy-*/
+
+# ---------- Excel Temp Files ----------
+~$*
+
+# ---------- Large Data Files ----------
+*.gpkg
 
 # ---------- Logs ----------
 *.log
