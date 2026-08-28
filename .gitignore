@@ -55,5 +55,3 @@ deploy-*/
 logs/
 tmp/
 .cache/
-
-data/

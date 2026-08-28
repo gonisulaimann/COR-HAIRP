@@ -1,20 +1,14 @@
-/**
- * client.ts   Typed Axios instance for COR-HARP API communication.
- *
- * TEMP-DOCS: This module creates a pre-configured Axios client that
- * automatically prefixes all requests with /api and sets JSON headers.
- * The Vite dev server proxies /api → localhost:8000 (see vite.config.ts).
- */
 import axios from "axios";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+
 const client = axios.create({
-  baseURL: "https://cor-harp-api.azurewebsites.net/api",
+  baseURL: API_BASE_URL,
   timeout: 30_000,
   headers: { "Content-Type": "application/json" },
 });
 
-// TEMP-DOCS: Response interceptor extracts .data automatically and
-// normalizes Axios errors into a readable message string.
 client.interceptors.response.use(
   (res) => res.data,
   (err) => {
