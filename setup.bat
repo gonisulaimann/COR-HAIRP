@@ -29,7 +29,7 @@ if not exist "hairp_app\.env" (
         echo # COR-HARP Environment Variables
         echo SENDGRID_API_KEY=your_sendgrid_api_key_here
         echo SENDGRID_SENDER_EMAIL=noreply@cor-harp.org
-        echo SENDGRID_SENDER_NAME=COR-HARP / UN OCHA
+        echo SENDGRID_SENDER_NAME=COR-HARP Humanitarian AI
         echo OTP_EXPIRY_SECONDS=300
         echo VALIDECT_HOST=validect-email-verification-v1.p.rapidapi.com
         echo VALIDECT_KEY=your_validect_key_here

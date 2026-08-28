@@ -2,7 +2,7 @@
 """
 app.py -- COR-HARP v4.0: Humanitarian AI Resource Predictor
 =============================================================
-Partnership of COR-HARP Engineering and UN OCHA.
+Open-source project for humanitarian operations in Northeast Nigeria.
 Air-traffic-control style real-time humanitarian dashboard for Borno
 State operations.  Integrates PyTorch LSTM inference (train_lstm.py),
 PuLP MILP optimisation + Monte Carlo simulation (optimizer.py), and
@@ -158,7 +158,7 @@ TOUR_STEPS = [
     {
         "title": "Welcome to COR-HARP",
         "desc": "Humanitarian AI Resource Predictor -- engineered for NGOs, SEMA, and NEMA "
-                "operating in Maiduguri in partnership with UN OCHA. This platform integrates a "
+                "operating in Maiduguri for humanitarian operations in Northeast Nigeria. This platform integrates a "
                 "221K-parameter PyTorch LSTM forecasting engine and a PuLP MILP operations research "
                 "optimizer for real-time humanitarian decision support.",
         "target": "sitrep",
@@ -373,7 +373,7 @@ def _send_otp_email(target_email: str, otp_code: str, user_name: str) -> Tuple[b
                                         <td>
                                             <p style="color:#5A6872; font-size:10px; margin:0;">
                                                 COR-HARP v4.0 | Partnership with UN OCHA<br>
-                                                Contains privileged humanitarian operational data.<br>
+                                                Open-source humanitarian AI for Northeast Nigeria.<br>
                                                 Unauthorized dissemination is prohibited under international security protocols.
                                             </p>
                                         </td>
@@ -408,8 +408,8 @@ def _send_otp_email(target_email: str, otp_code: str, user_name: str) -> Tuple[b
         Do not share this code with anyone.
 
         --
-        COR-HARP v4.0 | UN OCHA Partnership
-        Contains privileged humanitarian operational data.
+        COR-HARP v2.3 | Open Source
+        Open-source humanitarian AI for Northeast Nigeria.
         Unauthorized dissemination is prohibited under international security protocols.
         """
 
@@ -1714,7 +1714,7 @@ def _render_login():
             <div style="margin-bottom:20px;">
                 <span style="background:{UN_BLUE}; color:white; padding:3px 14px; border-radius:3px;
                        font-size:0.58rem; font-weight:700; letter-spacing:1.5px;">
-                    RESTRICTED -- OCHA INTERNAL
+                    OPEN SOURCE
                 </span>
             </div>
             <p style="color:{'#B0BCC8' if dark else '#374151'}; font-size:0.82rem; line-height:1.7; margin:0; max-width:380px;">
@@ -2028,7 +2028,7 @@ def _render_login():
         <div style="margin-top:16px; padding:8px 10px; background:{'rgba(0,158,219,0.08)' if dark else 'rgba(0,158,219,0.05)'}; border-radius:5px;
                     border-left:3px solid {UN_BLUE};">
             <p style="color:{'#8899AA' if dark else '#5A6872'}; font-size:0.68rem; margin:0;">
-                <strong>CLASSIFICATION NOTICE:</strong> This system contains privileged humanitarian
+                <strong>NOTICE:</strong> This system contains privileged humanitarian
                 operational data. All access is monitored and logged under UN security protocols.
             </p>
         </div>
@@ -2040,8 +2040,8 @@ def _render_login():
     # -- Fixed security disclaimer banner --
     st.markdown("""
     <div class="corharp-security-banner">
-        RESTRICTED: Contains privileged humanitarian operational data. Unauthorized dissemination
-        is strictly prohibited under international security protocols. COR-HARP v4.0 | UN OCHA Partnership
+        Open-source humanitarian AI for Northeast Nigeria.
+        Built with data from OCHA, WFP, IOM DTM, and IPC. | Open Source
     </div>
     """, unsafe_allow_html=True)
 
@@ -2235,7 +2235,7 @@ def _render_sidebar():
                 </div>
             </div>
             <div style="font-size:0.52rem; color:#5A6872; margin-top:4px; letter-spacing:0.5px;">
-                UN OCHA Partner | v4.0
+                Open Source | v2.3
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -2307,7 +2307,7 @@ def _header_banner(page_name: str):
             <div>
                 <h1 style="display:flex; align-items:center; gap:8px;">
                     COR-HARP
-                    <span class="security-badge">RESTRICTED</span>
+                    <span class="security-badge">OPEN SOURCE</span>
                     <span class="partnership-badge">UN OCHA PARTNER</span>
                 </h1>
             </div>
@@ -2360,7 +2360,7 @@ def _footer():
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;
                     border-top:1px solid rgba(255,255,255,0.08); padding-top:10px; margin-top:10px;">
             <span style="color:#5A6872; font-size:0.58rem; letter-spacing:0.3px;">
-                RESTRICTED: Contains privileged humanitarian operational data. Unauthorized dissemination
+                Open-source humanitarian AI for Northeast Nigeria.
                 is strictly prohibited under international security protocols. COR-HARP v4.0
             </span>
             <div style="display:flex; gap:12px; align-items:center;">
@@ -4288,7 +4288,7 @@ def page_privacy():
     ### COR-HARP -- Data Governance Framework
 
     #### 1. Data Classification
-    All data processed by this system is classified as **RESTRICTED -- OCHA INTERNAL** under UN security protocols.
+    All data processed by this system is classified as **OPEN SOURCE** under UN security protocols.
     This includes displacement statistics, conflict event data, food security assessments, population estimates,
     and derived model outputs.
 
@@ -4436,8 +4436,8 @@ def main():
     # -- Fixed immovable security disclaimer banner (bottom) --
     st.markdown("""
     <div class="corharp-security-banner">
-        RESTRICTED: Contains privileged humanitarian operational data. Unauthorized dissemination
-        is strictly prohibited under international security protocols. COR-HARP v4.0 | UN OCHA Partnership
+        Open-source humanitarian AI for Northeast Nigeria.
+        Built with data from OCHA, WFP, IOM DTM, and IPC. | Open Source
     </div>
     """, unsafe_allow_html=True)
 

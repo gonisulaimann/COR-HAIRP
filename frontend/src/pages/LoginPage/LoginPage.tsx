@@ -493,9 +493,11 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
           {/* Footer */}
           <div className="mt-10 pt-5 border-t border-white/[0.04] text-center">
             <p className="text-[0.6rem] text-surface-500/60 leading-relaxed">
-              COR-HARP v1.0 · UN OCHA Partner
+              COR-HARP v2.3 · Open-Source Humanitarian AI
               <br />
-              Contains privileged humanitarian operational data.
+              Built for aid workers in Northeast Nigeria.
+              <br />
+              <span className="text-un-blue/70">941K-parameter LSTM + MILP optimization engine</span>
             </p>
           </div>
         </div>

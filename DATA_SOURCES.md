@@ -104,7 +104,7 @@ app.py / backend/ml.py → Real-time inference → Dashboard visualizations
 - **Data files are NOT in Git** — they exceed GitHub's 100MB limit. Download separately and place in `data:/`.
 - **Model must be retrained** if data files change. Run: `cd hairp_app && python train_lstm.py`
 - **All external API calls** have graceful fallbacks (offline/mock data) if the API is unreachable.
-- **Sensitive data:** The datasets contain humanitarian operational data. Handle in accordance with UN OCHA data sharing protocols.
+- **Data licensing:** Datasets are licensed under Creative Commons (see individual licenses above). IPC data is CC BY-NC-SA 3.0 IGO (non-commercial use only).
 
 ---
 

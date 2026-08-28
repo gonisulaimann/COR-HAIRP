@@ -1,6 +1,6 @@
 # COR-HARP: Humanitarian AI Resource Predictor
 
-**Borno State Operations Dashboard — UN OCHA Partnership**
+**Open-Source Humanitarian AI for Northeast Nigeria**
 
 An advanced operational intelligence platform engineered for NGOs operating in Maiduguri, Nigeria. COR-HARP integrates a 221,057-parameter PyTorch LSTM forecasting engine, a PuLP MILP operations research optimizer, and an interactive geospatial command center — all running 100% offline.
 
@@ -174,6 +174,6 @@ MIT License — see [LICENSE](LICENSE)
 
 ## Contact
 
-**COR-HARP Engineering** — Partnership with UN OCHA
+**COR-HARP Contributors** — Open-Source Humanitarian Project
 
 For questions about this repository, open an issue or reach out to the maintainers.

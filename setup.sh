@@ -33,7 +33,7 @@ if [ ! -f "hairp_app/.env" ]; then
 # SendGrid (email OTP)
 SENDGRID_API_KEY=your_sendgrid_api_key_here
 SENDGRID_SENDER_EMAIL=noreply@cor-harp.org
-SENDGRID_SENDER_NAME=COR-HARP / UN OCHA
+SENDGRID_SENDER_NAME=COR-HARP Humanitarian AI
 OTP_EXPIRY_SECONDS=300
 
 # Validect (email verification)

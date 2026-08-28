@@ -24,7 +24,7 @@ load_dotenv(_ENV_PATH)
 
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY", "")
 SENDGRID_SENDER_EMAIL = os.environ.get("SENDGRID_SENDER_EMAIL", "noreply@cor-harp.org")
-SENDGRID_SENDER_NAME = os.environ.get("SENDGRID_SENDER_NAME", "COR-HARP / UN OCHA")
+SENDGRID_SENDER_NAME = os.environ.get("SENDGRID_SENDER_NAME", "COR-HARP Humanitarian AI")
 OTP_EXPIRY_SECONDS = int(os.environ.get("OTP_EXPIRY_SECONDS", "300"))
 
 # Allow overriding DB location via env var (Azure: use /home for writable persistent storage)
@@ -107,7 +107,7 @@ def send_otp_email(target_email: str, otp_code: str, user_name: str) -> Tuple[bo
         <tr><td align="center"><table width="480" cellpadding="0" cellspacing="0" style="background:#131825;border-radius:12px;border:1px solid rgba(0,158,219,0.2);">
         <tr><td style="background:linear-gradient(135deg,#1F4E79 0%,#0A1628 100%);padding:24px 32px;border-bottom:2px solid #009EDB;">
         <span style="background:#009EDB;color:white;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:1.5px;">COR-HARP</span>
-        <span style="color:#4BA3E3;font-size:11px;letter-spacing:1px;float:right;">UN OCHA PARTNER</span>
+        <span style="color:#4BA3E3;font-size:11px;letter-spacing:1px;float:right;">OPEN SOURCE</span>
         <h1 style="color:white;font-size:20px;margin:12px 0 4px 0;">Email Verification</h1>
         <p style="color:#4BA3E3;font-size:12px;margin:0;">Humanitarian AI Resource Predictor</p>
         </td></tr>
