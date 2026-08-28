@@ -27,7 +27,8 @@ SENDGRID_SENDER_EMAIL = os.environ.get("SENDGRID_SENDER_EMAIL", "noreply@cor-har
 SENDGRID_SENDER_NAME = os.environ.get("SENDGRID_SENDER_NAME", "COR-HARP / UN OCHA")
 OTP_EXPIRY_SECONDS = int(os.environ.get("OTP_EXPIRY_SECONDS", "300"))
 
-DB_PATH = Path(__file__).resolve().parent.parent / "hairp_app" / "users.db"
+# Allow overriding DB location via env var (Azure: use /home for writable persistent storage)
+DB_PATH = Path(os.environ.get("COR_HARP_DB_PATH", Path(__file__).resolve().parent.parent / "hairp_app" / "users.db"))
 
 # In-memory OTP store: {email: (code, sent_at, pending_name, pending_pass)}
 _otp_store: Dict[str, Dict[str, Any]] = {}
@@ -37,6 +38,7 @@ _otp_store: Dict[str, Dict[str, Any]] = {}
 
 def init_db():
     """Create the users table and seed admin user."""
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(DB_PATH))
     conn.execute("""
         CREATE TABLE IF NOT EXISTS users (

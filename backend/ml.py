@@ -37,7 +37,7 @@ from optimizer import BornoOptimizer, SolveResult
 
 # ── Constants ───────────────────────────────────────────────────────────────
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data:"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 MODEL_DIR = _HAIRP_DIR / "models"
 # Prefer v2 model if available, fallback to v1
 _V2_PATH = MODEL_DIR / "borno_lstm_v2.pth"
