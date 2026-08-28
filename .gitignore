@@ -55,3 +55,9 @@ deploy-*/
 logs/
 tmp/
 .cache/
+
+# Data files - tracked but excluded from deployment
+data/
+
+# Legacy app virtual environment
+hairp_app/venv/
