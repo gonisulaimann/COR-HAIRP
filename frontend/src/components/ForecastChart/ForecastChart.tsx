@@ -1,7 +1,6 @@
 /**
  * ForecastChart.tsx   LSTM forecast visualization using Recharts.
  *
- * TEMP-DOCS: Renders a LineChart showing predicted conflict events
  * over a forecast horizon. Includes a CartesianGrid, tooltips, and
  * responsive container for mobile sizing.
  *

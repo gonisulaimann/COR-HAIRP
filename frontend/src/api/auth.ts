@@ -1,7 +1,6 @@
 /**
  * auth.ts   Typed API functions for authentication endpoints.
  *
- * TEMP-DOCS: Every function here maps 1:1 to a POST/GET endpoint on
  * the FastAPI backend. Return types match backend/schemas.py exactly.
  */
 import type {

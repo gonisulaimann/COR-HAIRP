@@ -1,7 +1,6 @@
 /**
  * Dashboard.tsx   Executive Situation Report with KPIs and charts.
  *
- * TEMP-DOCS: Fetches KPI data, LSTM forecast, and sensitivity analysis
  * from the backend on mount. Shows animated KPI cards in a grid, a
  * forecast line chart, a sensitivity bar chart, and LSTM indicators.
  *

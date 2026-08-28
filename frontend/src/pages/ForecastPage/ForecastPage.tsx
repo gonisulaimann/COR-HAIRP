@@ -1,7 +1,6 @@
 /**
  * ForecastPage.tsx   Deep Learning Inference Engine with interactive controls.
  *
- * TEMP-DOCS: Provides LGA selector, forecast horizon slider, and escalation
  * factor slider. Fetches initial data on mount, re-fetches when the user
  * clicks "Run Forecast". Shows forecast chart, sensitivity chart, and
  * multi-LGA comparison.

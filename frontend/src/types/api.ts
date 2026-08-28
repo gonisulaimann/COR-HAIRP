@@ -1,7 +1,6 @@
 /**
  * api.ts   TypeScript interfaces for every COR-HARP API response shape.
  *
- * TEMP-DOCS: These types are a 1:1 mirror of the Pydantic models in
  * backend/schemas.py. If you change a response shape on the backend,
  * update the matching interface here so the frontend stays type-safe.
  */

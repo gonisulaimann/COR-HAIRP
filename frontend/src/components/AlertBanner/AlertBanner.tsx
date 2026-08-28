@@ -1,7 +1,6 @@
 /**
  * AlertBanner.tsx   Pulsating threat alert banner for the dashboard header.
  *
- * TEMP-DOCS: Displays a single rotating security alert with severity badge,
  * zone name, and message text. Renders as a sleek flexbox row.
  * Rotates through alerts every 30 seconds automatically.
  *

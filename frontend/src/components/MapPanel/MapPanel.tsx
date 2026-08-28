@@ -1,7 +1,6 @@
 /**
  * MapPanel.tsx   Interactive Leaflet map centered on Borno State.
  *
- * TEMP-DOCS: Renders a free OpenStreetMap tile layer with custom-styled
  * SVG markers for each LGA, dashed corridor polylines, and IDP concentration
  * circles. Critical markers have a pulsing glow animation. Each marker has
  * a dark-themed popup with risk level and LSTM prediction.

@@ -1,7 +1,6 @@
 /**
  * Sidebar.tsx   Permanent sidebar navigation with tiered module menu.
  *
- * TEMP-DOCS: Displays COR-HARP branding and tiered nav menu. Icons are
  * lucide-react components passed via props. Tier separators (objects with
  * only a `tier` key) are detected and rendered as section headers.
  */

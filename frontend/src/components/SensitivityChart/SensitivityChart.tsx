@@ -1,7 +1,6 @@
 /**
  * SensitivityChart.tsx   Feature importance bar chart from LSTM perturbation.
  *
- * TEMP-DOCS: Renders a horizontal BarChart showing the top N features
  * by sensitivity score. Higher values mean the feature has more impact
  * on the LSTM prediction.
  *

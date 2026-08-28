@@ -1,7 +1,6 @@
 /**
  * LoginPage.tsx   Enterprise-grade COR-HARP authentication page.
  *
- * TEMP-DOCS: Split-screen layout   left branded panel with Lottie animation
  * and stat highlights, right panel with the login form. Supports 4 modes:
  * login, register, OTP verification, and forgot password. All icons from
  * lucide-react. Real-time email validation, password visibility toggle,

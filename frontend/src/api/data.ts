@@ -1,7 +1,6 @@
 /**
  * data.ts   Typed API functions for dashboard data, forecast, map, optimizer.
  *
- * TEMP-DOCS: Each function calls a specific REST endpoint and returns
  * the typed response. The frontend components consume these directly.
  */
 import type {

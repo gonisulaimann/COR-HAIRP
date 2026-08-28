@@ -1,7 +1,6 @@
 /**
  * App.tsx   Main application shell with sidebar navigation and auth gate.
  *
- * TEMP-DOCS: Handles three states: (1) unauthenticated → LoginPage,
  * (2) authenticated → sidebar + routed pages, (3) loading → skeleton.
  * The sidebar renders 20 navigation items across 3 tiers. Active route
  * is highlighted. Zero user data is displayed in the sidebar.

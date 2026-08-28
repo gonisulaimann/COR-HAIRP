@@ -1,7 +1,6 @@
 /**
  * TelemetryFeed.tsx   Live risk telemetry side panel.
  *
- * TEMP-DOCS: Displays real-time risk metrics in a vertical stack:
  * total IDP population, critical zones, average neural risk, and
  * a per-LGA risk index list with color-coded badges.
  *

@@ -1,7 +1,6 @@
 /**
  * KpiCard.tsx   Animated KPI metric card with count-up animation.
  *
- * TEMP-DOCS: Displays a single key performance indicator with an
  * animated numeric value that counts up from 0 on mount, a label,
  * a delta badge, and a pulsing indicator dot.
  *

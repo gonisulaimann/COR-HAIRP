@@ -1,7 +1,6 @@
 /**
  * Marquee.tsx   Continuous scrolling food price / data ticker.
  *
- * TEMP-DOCS: A pure-CSS marquee that duplicates its content for seamless
  * looping. Each item has a colored dot, label, and value.
  *
  * Props:

@@ -1,7 +1,6 @@
 /**
  * GlassCard.tsx   Reusable glassmorphism card container.
  *
- * TEMP-DOCS: Wraps children in a frosted-glass card matching the
  * COR-HARP dark-mode aesthetic. Accepts className for layout overrides,
  * hover for interactive lift effect, and animate for entrance class.
  *

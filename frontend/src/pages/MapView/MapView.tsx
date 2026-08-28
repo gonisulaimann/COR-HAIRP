@@ -1,7 +1,6 @@
 /**
  * MapView.tsx   Master Spatial Command Map with list+map split layout.
  *
- * TEMP-DOCS: Fetches map markers and corridors from the backend. Renders
  * a scrollable LGA list panel (left, ~35%) and an interactive Leaflet map
  * (right, ~65%). Clicking a list card flies the map to that LGA. Clicking
  * a map marker highlights the corresponding list card. Includes floating

@@ -1,7 +1,6 @@
 /**
  * LoadingSkeleton.tsx   Animated shimmer skeleton for loading states.
  *
- * TEMP-DOCS: Renders one or more skeleton bars with a shimmer animation.
  * Accepts count for multiple bars, height for custom sizing, and
  * className for layout overrides.
  *

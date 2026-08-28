@@ -1,7 +1,6 @@
 /**
  * OptimizerPage.tsx   MILP Supply Chain Optimizer with Monte Carlo simulation.
  *
- * TEMP-DOCS: Provides controls for planning periods, equity weight, and
  * MC iterations. Runs the optimizer and displays KPI cards, unmet demand
  * bar chart, and route matrix table.
  */
