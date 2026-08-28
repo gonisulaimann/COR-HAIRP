@@ -57,10 +57,15 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS — allow the React dev server and any origin during development
+# CORS — allow the deployed frontend and local dev server
+ALLOWED_ORIGINS = [
+    "https://icy-river-0d05cf50f.7.azurestaticapps.net",
+    "http://localhost:3000",
+    "http://localhost:5173",
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
