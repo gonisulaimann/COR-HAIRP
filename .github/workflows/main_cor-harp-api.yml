@@ -40,6 +40,9 @@ jobs:
           path: |
             .
             !antenv/
+            !data/
+            !.venv/
+            !frontend/node_modules/
 
       # 🚫 Opting Out of Oryx Build
       # If you prefer to disable the Oryx build process during deployment, follow these steps:
