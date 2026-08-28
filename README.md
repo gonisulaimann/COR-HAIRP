@@ -1,144 +1,112 @@
-<a id="readme-top"></a>
-
 <!-- PROJECT SHIELDS -->
-[![Python 3.11][python-shield]][python-url]
-[![FastAPI][fastapi-shield]][fastapi-url]
-[![React][react-shield]][react-url]
-[![PyTorch][pytorch-shield]][pytorch-url]
-[![License: MIT][license-shield]][license-url]
+[![GitHub Release](https://img.shields.io/github/release/gonisulaimann/COR-HAIRP.svg?style=for-the-badge)](https://github.com/gonisulaimann/COR-HAIRP/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/gonisulaimann/COR-HAIRP.svg?style=for-the-badge)](https://github.com/gonisulaimann/COR-HAIRP/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/gonisulaimann/COR-HAIRP.svg?style=for-the-badge)](https://github.com/gonisulaimann/COR-HAIRP/network/members)
+[![License](https://img.shields.io/badge/license-hippocratic-orange.svg?style=for-the-badge)](https://github.com/gonisulaimann/COR-HAIRP/blob/main/LICENSE)
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![React](https://img.shields.io/badge/React-20232A.svg?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C.svg?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h1>🎯 COR-HARP</h1>
+  <a href="https://github.com/gonisulaimann/COR-HAIRP">
+    <img src="frontend/assets/HAIRP.png" alt="COR-HARP Logo" width="150" height="150">
+  </a>
+
+  <h1>COR-HARP</h1>
   <h3>Humanitarian AI Resource Predictor</h3>
+
   <p>
-    <strong>Open-source AI for humanitarian operations in Northeast Nigeria</strong>
-    <br />
-    Built for aid workers, NGOs, SEMA, and NEMA operating in Borno State
+    <strong>Open-source AI for aid workers in Northeast Nigeria</strong>
   </p>
 
-  <a href="https://cor-harp-api.azurewebsites.net/docs">API Docs</a>
+  <p>
+    Real-time conflict forecasting • Supply chain optimization • Geospatial intelligence
+  </p>
+
+  <br />
+
+  <a href="https://icy-river-0d05cf50f.7.azurestaticapps.net">🚀 Live Demo</a>
   ·
-  <a href="https://icy-river-0d05cf50f.7.azurestaticapps.net">Live Demo</a>
+  <a href="https://cor-harp-api.azurewebsites.net/docs">📚 API Docs</a>
   ·
-  <a href="https://github.com/gonisulaimann/COR-HAIRP/issues">Report Bug</a>
+  <a href="https://github.com/gonisulaimann/COR-HAIRP/issues">🐛 Report Bug</a>
   ·
-  <a href="https://github.com/gonisulaimann/COR-HAIRP/issues">Request Feature</a>
+  <a href="https://github.com/gonisulaimann/COR-HAIRP/blob/main/CONTRIBUTING.md">🤝 Contributing</a>
 </div>
 
 ---
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#tech-stack">Tech Stack</a></li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#quickstart">Quickstart</a></li>
-    <li><a href="#api-reference">API Reference</a></li>
-    <li><a href="#data-sources">Data Sources</a></li>
-    <li><a href="#model-details">Model Details</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+<!-- ABOUT THE PROJECT -->
+## 🎯 About
+
+**COR-HARP** (Humanitarian AI Resource Predictor) is an open-source operational intelligence platform built specifically for humanitarian aid workers operating in Borno State, Northeast Nigeria.
+
+> *"Technology should serve those who serve others."*
+
+### Why COR-HARP?
+
+Humanitarian workers in Northeast Nigeria face unprecedented challenges:
+- **1.36M+** internally displaced persons (IDPs)
+- **5** critically monitored Local Government Areas (LGAs)
+- Complex supply chain logistics across conflict-affected zones
+- Limited connectivity and infrastructure
+
+COR-HARP provides **AI-powered decision support** to help aid workers:
+- 📊 **Predict** conflict events before they happen
+- 🚚 **Optimize** supply chain routes and resource allocation
+- 🗺️ **Visualize** real-time humanitarian data on interactive maps
+- 📈 **Monitor** key performance indicators across operations
+
+### Built With Data From
+
+| Source | Description | License |
+|--------|-------------|---------|
+| [OCHA ReliefWeb](https://data.humdata.org/) | Political Violence Events | CC BY-IGO |
+| [WFP VAM](https://dataviz.vam.wfp.org/) | Food Prices Database | CC BY 4.0 |
+| [IOM DTM](https://dtm.iom.int/) | Displacement Tracking | CC BY 4.0 |
+| [IPC](https://www.ipcinfo.org/) | Food Insecurity Data | CC BY-NC-SA 3.0 |
 
 ---
 
-## About The Project
+## ✨ Features
 
-**COR-HARP** (Humanitarian AI Resource Predictor) is an open-source operational intelligence platform designed for humanitarian aid workers operating in Northeast Nigeria. The platform integrates:
-
-- **LSTM Forecasting**: A 941K-parameter deep learning model for predicting conflict events and displacement patterns
-- **MILP Optimization**: Operations research solver for humanitarian supply chain optimization
-- **Geospatial Intelligence**: Interactive mapping with real-time data visualization
-- **Multi-Agent Simulation**: AI-powered scenario planning for humanitarian response
-
-Built with data from [OCHA ReliefWeb](https://data.humdata.org/), [WFP VAM](https://dataviz.vam.wfp.org/), [IOM DTM](https://dtm.iom.int/), and [IPC](https://www.ipcinfo.org/).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## Features
-
-| Feature | Description |
-|---------|-------------|
-| **Real-time LSTM Forecasting** | 941K-parameter model predicting conflict events across 5 LGAs |
-| **MILP Supply Chain Optimizer** | PuLP-based optimization with Monte Carlo simulation |
-| **Interactive Geospatial Dashboard** | Leaflet.js maps with real-time markers and corridors |
-| **KPI Monitoring** | Live dashboard with IDP population, food security, and risk metrics |
-| **User Authentication** | Secure login with OTP email verification |
-| **RESTful API** | FastAPI backend with auto-generated OpenAPI documentation |
-| **Multi-Agent Copilot** | AI-powered scenario planning interface |
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | React 18, TypeScript, Vite, Recharts, React-Leaflet, Tailwind CSS |
-| **Backend** | Python 3.11, FastAPI, Uvicorn, Pydantic, SQLite |
-| **ML/AI** | PyTorch (941K params), scikit-learn, NumPy |
-| **Optimization** | PuLP MILP solver, Monte Carlo simulation |
-| **Auth** | SHA-256 hashing, SendGrid OTP, session tokens |
-| **Geospatial** | Leaflet.js, OpenStreetMap, CartoDB tiles |
-| **Deployment** | Azure App Service, Azure Static Web Apps, GitHub Actions |
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <h3>🧠 LSTM Forecasting</h3>
+      <p>941K-parameter deep learning model predicting conflict events across 5 LGAs with 12-month horizons</p>
+    </td>
+    <td align="center" width="33%">
+      <h3>🚚 MILP Optimization</h3>
+      <p>Operations research solver optimizing humanitarian supply chains with Monte Carlo simulation</p>
+    </td>
+    <td align="center" width="33%">
+      <h3>🗺️ Geospatial Intelligence</h3>
+      <p>Interactive Leaflet.js maps with real-time markers, corridors, and risk visualization</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <h3>📊 KPI Dashboard</h3>
+      <p>Live monitoring of IDP populations, food security phases, and operational metrics</p>
+    </td>
+    <td align="center">
+      <h3>🔐 Secure Authentication</h3>
+      <p>OTP email verification, role-based access, and audit logging</p>
+    </td>
+    <td align="center">
+      <h3>🤖 Multi-Agent Copilot</h3>
+      <p>AI-powered scenario planning for humanitarian response strategies</p>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## Architecture
-
-```
-COR-HAIRP/
-├── frontend/           # React + Vite SPA
-│   ├── src/
-│   │   ├── components/ # Reusable UI components
-│   │   ├── pages/      # Dashboard, Map, Forecast, Optimizer
-│   │   └── api/        # Axios client for backend
-│   └── package.json
-│
-├── backend/            # FastAPI REST API
-│   ├── main.py         # FastAPI app with all routes
-│   ├── ml.py           # ML inference (wraps train_lstm.py)
-│   ├── auth.py         # Authentication & user management
-│   ├── schemas.py      # Pydantic request/response models
-│   └── requirements.txt
-│
-├── hairp_app/          # Legacy Streamlit app (production fallback)
-│   ├── app.py          # Full-stack Streamlit monolith
-│   ├── train_lstm.py   # LSTM model training pipeline
-│   ├── train_lstm_v2.py # V2 LSTM with attention
-│   ├── optimizer.py    # MILP + Monte Carlo optimizer
-│   └── models/         # Trained model weights
-│
-├── data/               # Humanitarian datasets
-├── setup.sh            # One-command setup (Mac/Linux)
-├── setup.bat           # One-command setup (Windows)
-├── DATA_SOURCES.md     # Dataset provenance & licensing
-└── LICENSE             # MIT License
-```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## Quickstart
-
-### Prerequisites
-
-- Python 3.11+
-- Node.js 18+
-- npm or yarn
+## 🚀 Quick Start
 
 ### One-Command Setup
 
@@ -151,175 +119,185 @@ chmod +x setup.sh
 
 ### Manual Setup
 
-#### 1. Python Environment
-
 ```bash
+# 1. Clone the repository
+git clone https://github.com/gonisulaimann/COR-HAIRP.git
+cd COR-HAIRP
+
+# 2. Setup Python environment
 python3 -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-```
 
-#### 2. Frontend
-
-```bash
+# 3. Setup frontend
 cd frontend
 npm install
-npm run dev
-```
+cd ..
 
-#### 3. Backend
-
-```bash
-uvicorn backend.main:app --reload --port 8000
-```
-
-#### 4. Environment Variables
-
-Copy `.env.example` to `.env` and configure your API keys:
-
-```bash
+# 4. Configure environment
 cp hairp_app/.env.example hairp_app/.env
-# Edit .env with your SendGrid, Validect API keys
+# Edit .env with your API keys
+
+# 5. Start the servers
+# Terminal 1 - Backend
+uvicorn backend.main:app --reload --port 8000
+
+# Terminal 2 - Frontend
+cd frontend && npm run dev
 ```
 
-### Running Locally
+### 🌐 Access Points
 
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
-- **Legacy Streamlit**: `cd hairp_app && streamlit run app.py`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+| Service | URL | Description |
+|---------|-----|-------------|
+| **Frontend** | http://localhost:3000 | React dashboard |
+| **Backend API** | http://localhost:8000 | FastAPI server |
+| **API Docs** | http://localhost:8000/docs | OpenAPI documentation |
+| **Legacy UI** | http://localhost:8501 | Streamlit fallback |
 
 ---
 
-## API Reference
+## 📊 API Reference
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `GET` | `/api/health` | Health check |
 | `POST` | `/api/auth/login` | Authenticate user |
 | `POST` | `/api/auth/register` | Register + send OTP |
-| `POST` | `/api/auth/verify-otp` | Verify OTP, complete registration |
-| `GET` | `/api/kpis` | Dashboard KPI summary cards |
-| `POST` | `/api/forecast/borno` | LSTM forecast for a specific LGA |
-| `GET` | `/api/forecast/multi-lga` | Predictions for all LGAs |
-| `GET` | `/api/map/markers` | Map markers & transit corridors |
-| `POST` | `/api/optimize` | MILP + Monte Carlo optimization |
-| `GET` | `/api/ml/sensitivity` | Feature importance analysis |
-| `GET` | `/api/telemetry` | System telemetry & model info |
-| `GET` | `/api/audit` | Audit trail |
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+| `GET` | `/api/kpis` | Dashboard KPI summary |
+| `POST` | `/api/forecast/borno` | LSTM forecast for LGA |
+| `GET` | `/api/forecast/multi-lga` | All LGA predictions |
+| `GET` | `/api/map/markers` | Map markers & corridors |
+| `POST` | `/api/optimize` | MILP + Monte Carlo |
+| `GET` | `/api/ml/sensitivity` | Feature importance |
 
 ---
 
-## Data Sources
+## 🧠 Model Details
 
-COR-HARP integrates data from leading humanitarian data providers:
+### LSTM v2.3 Architecture
 
-| Source | Dataset | License |
-|--------|---------|---------|
-| [OCHA ReliefWeb](https://data.humdata.org/) | Political Violence Events & Fatalities | CC BY-IGO |
-| [WFP VAM](https://dataviz.vam.wfp.org/) | Food Prices Database | CC BY 4.0 |
-| [IOM DTM](https://dtm.iom.int/) | Displacement Tracking Matrix | CC BY 4.0 |
-| [IPC](https://www.ipcinfo.org/) | Acute Food Insecurity Data | CC BY-NC-SA 3.0 IGO |
-| [IDMC](https://www.internal-displacement.org/) | Internal Displacement Data | CC BY 4.0 |
+```
+┌─────────────────────────────────────────────────────────┐
+│                    COR-HARP LSTM v2.3                   │
+├─────────────────────────────────────────────────────────┤
+│  Parameters:     941,441                                │
+│  Architecture:   3-layer LSTM + Multi-Head Attention    │
+│  Hidden Size:    192                                    │
+│  Input Features: 23 (conflict, food, IDP, IPC)         │
+│  Output:         Monthly conflict event predictions     │
+│  Training:       100 epochs, Adam optimizer             │
+└─────────────────────────────────────────────────────────┘
+```
 
-See [DATA_SOURCES.md](DATA_SOURCES.md) for complete dataset documentation including download links and licensing details.
+### Input Features
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## Model Details
-
-### LSTM v2.3 (941K Parameters)
-
-- **Architecture**: 3-layer LSTM with multi-head attention
-- **Hidden Size**: 192
-- **Input Features**: 23 (conflict, food prices, IDP, IPC)
-- **Output**: Monthly conflict event predictions
-- **Training**: 100 epochs, Adam optimizer, MSE loss
-
-### Features Used
-
-1. Conflict events per LGA
-2. Fatalities per LGA
-3. Food prices (Rice, Millet, Sorghum, Maize)
-4. IPC Phase 3+ population percentages
-5. IDP camp populations
-6. Displacement flows
-
-### MILP Optimizer
-
-- **Objective**: Minimize total cost + equity penalty
-- **Constraints**: Supply capacity, demand, route capacity
-- **Monte Carlo**: 100+ iterations for uncertainty quantification
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+| Category | Features |
+|----------|----------|
+| **Conflict** | Events, fatalities, event types |
+| **Food Security** | Rice, millet, sorghum, maize prices |
+| **Displacement** | IDP camp populations, flows |
+| **Nutrition** | IPC Phase 3+ percentages |
 
 ---
 
-## Contributing
+## 🏗️ Architecture
 
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Branch Naming
-
-- `feature/` — New features
-- `fix/` — Bug fixes
-- `refactor/` — Code restructuring
-- `docs/` — Documentation updates
-
-### Development Guidelines
-
-- Follow existing code style
-- Add tests for new features
-- Update documentation as needed
-- Keep commits atomic and well-described
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+```
+COR-HAIRP/
+├── frontend/           # React + Vite SPA
+│   ├── src/
+│   │   ├── components/ # Reusable UI components
+│   │   ├── pages/      # Dashboard, Map, Forecast, Optimizer
+│   │   └── api/        # Axios client for backend
+│   └── package.json
+│
+├── backend/            # FastAPI REST API
+│   ├── main.py         # FastAPI app with all routes
+│   ├── ml.py           # ML inference engine
+│   ├── auth.py         # Authentication & user management
+│   └── schemas.py      # Pydantic models
+│
+├── hairp_app/          # Legacy Streamlit app
+│   ├── app.py          # Full-stack monolith
+│   ├── train_lstm.py   # LSTM training pipeline
+│   └── optimizer.py    # MILP optimizer
+│
+├── data/               # Humanitarian datasets
+├── docs/               # Documentation
+└── setup.sh            # One-click setup
+```
 
 ---
 
-## Acknowledgments
+## 🤝 Contributing
 
-- [OCHA Humanitarian Data Exchange](https://data.humdata.org/) — Open data for humanitarian response
-- [WFP VAM Food Prices Database](https://dataviz.vam.wfp.org/) — Global food price monitoring
-- [IOM Displacement Tracking Matrix](https://dtm.iom.int/) — Displacement data and analysis
-- [IPC Global Support Unit](https://www.ipcinfo.org/) — Food insecurity classification
+We welcome contributions from the humanitarian and tech communities!
+
+### Ways to Contribute
+
+- 🐛 **Report bugs** — Help us fix issues
+- 💡 **Suggest features** — Share your ideas
+- 📝 **Improve docs** — Make information clearer
+- 🧪 **Write tests** — Ensure reliability
+- 🌍 **Translate** — Help aid workers worldwide
+- 💬 **Support others** — Answer questions
+
+### Quick Start
+
+1. Read our [Contributing Guidelines](CONTRIBUTING.md)
+2. Check [open issues](https://github.com/gonisulaimann/COR-HAIRP/issues)
+3. Fork the repository
+4. Create a feature branch
+5. Submit a pull request
+
+### Code of Conduct
+
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you agree to uphold this code.
+
+---
+
+## 📜 License
+
+This project is licensed under the **Hippocratic License 3.0** — see the [LICENSE](LICENSE) file for details.
+
+**Documentation** is licensed under [CC BY 4.0](docs/LICENSE).
+
+### What This Means
+
+✅ **You can:**
+- Use the software for humanitarian purposes
+- Modify and distribute the code
+- Create derivative works
+
+❌ **You cannot:**
+- Use the software for surveillance or oppression
+- Use it to violate human rights
+- Use it for weapons development
+
+---
+
+## 🙏 Acknowledgments
+
+- [OCHA](https://www.unocha.org/) — Humanitarian data and coordination
+- [WFP](https://www.wfp.org/) — Food security data
+- [IOM](https://www.iom.int/) — Displacement tracking
+- [IPC](https://www.ipcinfo.org/) — Food insecurity classification
 - [PyTorch](https://pytorch.org/) — Deep learning framework
-- [FastAPI](https://fastapi.tiangolo.com/) — Modern Python web framework
-- [React](https://react.dev/) — Frontend UI library
-- [Leaflet.js](https://leafletjs.com/) — Interactive maps
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- [FastAPI](https://fastapi.tiangolo.com/) — Modern Python APIs
+- [React](https://react.dev/) — Frontend framework
+- [Leaflet](https://leafletjs.com/) — Interactive maps
 
 ---
 
-<!-- MARKDOWN LINKS & IMAGES -->
-[python-shield]: https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white
-[python-url]: https://www.python.org/
-[fastapi-shield]: https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white
-[fastapi-url]: https://fastapi.tiangolo.com/
-[react-shield]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[react-url]: https://react.dev/
-[pytorch-shield]: https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white
-[pytorch-url]: https://pytorch.org/
-[license-shield]: https://img.shields.io/badge/License-MIT-yellow.svg
-[license-url]: https://github.com/gonisulaimann/COR-HAIRP/blob/main/LICENSE
+<div align="center">
+
+**Built with ❤️ for humanitarian aid workers**
+
+*"In a world where you can be anything, be kind."*
+
+<br />
+
+[⬆ Back to Top](#-cor-harp)
+
+</div>
