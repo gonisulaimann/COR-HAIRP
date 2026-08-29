@@ -1,6 +1,6 @@
 # COR-HARP Backend Deployment
-# Uses Azure Oryx to build Python dependencies during deployment.
-# No pre-built virtualenv is uploaded — Oryx handles pip install from requirements.txt.
+# Creates a minimal zip with only source code + models.
+# Azure Oryx builds Python dependencies from requirements.txt during deployment.
 
 name: Build and deploy Python app to Azure Web App - cor-harp-api
 
@@ -23,6 +23,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create deployment package (exclude venv, frontend, data, .git)
+        run: |
+          mkdir -p deploy-staging
+          # Copy only what the backend needs
+          cp -r backend/ deploy-staging/
+          cp requirements.txt deploy-staging/
+          cp startup.sh deploy-staging/
+          # Copy hairp_app source + models, but NOT venv/__pycache__
+          mkdir -p deploy-staging/hairp_app
+          cp hairp_app/*.py deploy-staging/hairp_app/
+          cp -r hairp_app/models/ deploy-staging/hairp_app/
+          cp hairp_app/.env deploy-staging/hairp_app/ 2>/dev/null || true
+          # Create zip
+          cd deploy-staging && zip -r ../deploy.zip .
+          cd ..
+          echo "Package size:"
+          ls -lh deploy.zip
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -51,3 +69,4 @@ jobs:
         with:
           app-name: 'cor-harp-api'
           slot-name: 'Production'
+          package: deploy.zip
