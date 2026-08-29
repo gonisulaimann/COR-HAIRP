@@ -1,7 +1,4 @@
 # COR-HARP Backend — Deployment Requirements
-# CPU-only PyTorch index for Azure App Service (no GPU)
-
---extra-index-url https://download.pytorch.org/whl/cpu
 
 # Web framework
 fastapi>=0.104.0
