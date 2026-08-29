@@ -35,6 +35,64 @@ jobs:
           output_location: "dist" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
+  smoke_test_job:
+    needs: build_and_deploy_job
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    name: Post-Deploy Smoke Test
+    steps:
+      - name: Wait for deployment to propagate
+        run: sleep 30
+
+      - name: Verify backend health
+        run: |
+          echo "Checking backend health endpoint..."
+          for i in 1 2 3 4 5; do
+            HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' \
+              --connect-timeout 10 --max-time 30 \
+              'https://cor-harp-api.azurewebsites.net/api/health')
+            if [ "$HTTP_CODE" = '200' ]; then
+              echo "✅ Backend healthy (HTTP $HTTP_CODE)"
+              exit 0
+            fi
+            echo "⏳ Attempt $i: backend returned HTTP $HTTP_CODE, retrying in 15s..."
+            sleep 15
+          done
+          echo "❌ Backend health check failed after 5 attempts"
+          exit 1
+
+      - name: Verify frontend bundle contains correct API URL
+        run: |
+          echo "Fetching deployed frontend..."
+          HTML=$(curl -s --connect-timeout 10 --max-time 30 \
+            'https://icy-river-0d05cf50f.7.azurestaticapps.net')
+          
+          # Extract JS bundle filename from index.html
+          BUNDLE_PATH=$(echo "$HTML" | grep -oP 'src="/assets/[^"]+\.js"' | head -1 | sed 's/src="//;s/"//')
+          if [ -z "$BUNDLE_PATH" ]; then
+            echo "❌ Could not find JS bundle reference in index.html"
+            exit 1
+          fi
+          echo "📦 Bundle: $BUNDLE_PATH"
+          
+          # Fetch the JS bundle and verify it contains the backend URL
+          JS_CONTENT=$(curl -s --connect-timeout 10 --max-time 30 \
+            "https://icy-river-0d05cf50f.7.azurestaticapps.net${BUNDLE_PATH}")
+          
+          if echo "$JS_CONTENT" | grep -q 'cor-harp-api.azurewebsites.net'; then
+            echo "✅ JS bundle contains correct backend URL (cor-harp-api.azurewebsites.net)"
+          else
+            echo "❌ JS bundle does NOT contain cor-harp-api.azurewebsites.net"
+            if echo "$JS_CONTENT" | grep -q 'localhost:8000'; then
+              echo "❌ FOUND localhost:8000 — env var was NOT injected during build!"
+            fi
+            exit 1
+          fi
+          
+          if echo "$JS_CONTENT" | grep -q 'localhost:8000'; then
+            echo "⚠️  WARNING: Bundle also contains localhost:8000 (fallback URL)"
+          fi
+
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
