@@ -49,7 +49,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+from .cors import RegexCORSMiddleware
 
 from . import auth, ml
 from .schemas import (
@@ -88,23 +88,27 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS — allow the deployed frontend and local dev server
-# Production frontend + local dev servers (explicit)
+# ── CORS ──────────────────────────────────────────────────────────────────
+# Uses a custom RegexCORSMiddleware (backend/cors.py) that extends
+# Starlette's CORSMiddleware with regex-based origin matching.
+# This handles Azure SWA's dynamic PR preview URLs, which change
+# with every pull request (e.g., -1.eastus2, -2.westus3, etc.).
+#
+# The static list covers production and localhost.
+# The regex covers all current and future PR preview domains.
 ALLOWED_ORIGINS = [
     "https://icy-river-0d05cf50f.7.azurestaticapps.net",
     "http://localhost:3000",
     "http://localhost:5173",
 ]
 
-# Regex to match ALL Azure SWA deployment URLs (production + PR previews).
-# Production:  https://icy-river-0d05cf50f.7.azurestaticapps.net
-# PR previews: https://icy-river-0d05cf50f-<N>.<region>.7.azurestaticapps.net
-# The (-\d+\.\d+)? group is optional so it matches both patterns.
-# This prevents every new PR from hitting a CORS error.
+# Matches all Azure SWA deployment URLs for this app:
+#   Production:  https://icy-river-0d05cf50f.7.azurestaticapps.net
+#   PR previews: https://icy-river-0d05cf50f-<N>.<region>.7.azurestaticapps.net
 SWA_PREVIEW_REGEX = r"^https://icy-river-0d05cf50f(-\d+\.[a-z0-9]+)?\.7\.azurestaticapps\.net$"
 
 app.add_middleware(
-    CORSMiddleware,
+    RegexCORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
     allow_origin_regex=SWA_PREVIEW_REGEX,
     allow_credentials=True,
