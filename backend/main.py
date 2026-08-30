@@ -89,14 +89,24 @@ app = FastAPI(
 )
 
 # CORS — allow the deployed frontend and local dev server
+# Production frontend + local dev servers (explicit)
 ALLOWED_ORIGINS = [
     "https://icy-river-0d05cf50f.7.azurestaticapps.net",
     "http://localhost:3000",
     "http://localhost:5173",
 ]
+
+# Regex to match ALL Azure SWA deployment URLs (production + PR previews).
+# Production:  https://icy-river-0d05cf50f.7.azurestaticapps.net
+# PR previews: https://icy-river-0d05cf50f-<N>.<region>.7.azurestaticapps.net
+# The (-\d+\.\d+)? group is optional so it matches both patterns.
+# This prevents every new PR from hitting a CORS error.
+SWA_PREVIEW_REGEX = r"^https://icy-river-0d05cf50f(-\d+\.[a-z0-9]+)?\.7\.azurestaticapps\.net$"
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=SWA_PREVIEW_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
