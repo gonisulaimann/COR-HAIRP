@@ -1,5 +1,5 @@
 # COR-HARP Backend Deployment
-# Creates a minimal zip with source code + models + data files.
+# Creates a zip with source code + models + data files.
 # Azure Oryx builds Python dependencies from requirements.txt during deployment.
 
 name: Build and deploy Python app to Azure Web App - cor-harp-api
@@ -68,14 +68,7 @@ jobs:
             az webapp config appsettings set \
               --resource-group RG-COR-HARP \
               --name cor-harp-api \
-              --settings \
-                SCM_DO_BUILD_DURING_DEPLOYMENT=true \
-                ENABLE_ORYX_BUILD=true \
-                WEBSITE_RUN_FROM_PACKAGE=0
-            az webapp config set \
-              --resource-group RG-COR-HARP \
-              --name cor-harp-api \
-              --generic-configuration '{"alwaysOn": true}'
+              --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true ENABLE_ORYX_BUILD=true
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
@@ -94,12 +87,12 @@ jobs:
           for i in $(seq 1 15); do
             STATUS=$(curl -sw "%{http_code}" --max-time 10 "https://cor-harp-api.azurewebsites.net/api/health" 2>/dev/null)
             if [ "$STATUS" = "200" ]; then
-              echo "✅ Backend healthy (attempt $i)"
+              echo "Backend healthy (attempt $i)"
               curl -s "https://cor-harp-api.azurewebsites.net/api/health"
               exit 0
             fi
-            echo "⏳ Attempt $i: HTTP $STATUS — waiting 30s..."
+            echo "Attempt $i: HTTP $STATUS - waiting 30s..."
             sleep 30
           done
-          echo "❌ Backend failed to become healthy after 15 attempts"
+          echo "Backend failed to become healthy after 15 attempts"
           exit 1
