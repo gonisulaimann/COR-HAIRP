@@ -68,7 +68,7 @@ jobs:
             az webapp config appsettings set \
               --resource-group RG-COR-HARP \
               --name cor-harp-api \
-              --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true ENABLE_ORYX_BUILD=true
+              --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true ENABLE_ORYX_BUILD=true DO_CLEAN_DEPLOYMENT=true
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
@@ -85,7 +85,7 @@ jobs:
         run: |
           echo "Waiting for backend to become healthy..."
           for i in $(seq 1 15); do
-            STATUS=$(curl -sw "%{http_code}" --max-time 10 "https://cor-harp-api.azurewebsites.net/api/health" 2>/dev/null)
+            STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "https://cor-harp-api.azurewebsites.net/api/health" 2>/dev/null)
             if [ "$STATUS" = "200" ]; then
               echo "Backend healthy (attempt $i)"
               curl -s "https://cor-harp-api.azurewebsites.net/api/health"

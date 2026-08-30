@@ -135,10 +135,6 @@ except Exception as e:
         allow_headers=["*"],
     )
 
-# ── Temporary CORS diagnostic (REMOVE AFTER DIAGNOSIS) ─────────────────
-from ._cors_diagnostic import router as _diag_router
-app.include_router(_diag_router)
-
 # Initialize database on startup
 @app.on_event("startup")
 def startup():
