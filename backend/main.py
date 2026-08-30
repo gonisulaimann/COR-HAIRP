@@ -1,15 +1,46 @@
 """
-main.py — COR-HARP FastAPI Backend
+COR-HARP FastAPI Backend
+========================
 
-REST API server exposing data/ML/auth logic as clean endpoints.
-The frontend (React/Vite) fetches all data from this server.
+REST API server for the Conflict-Oriented Humanitarian AI Resource Predictor.
+Exposes ML inference, supply chain optimization, authentication, and
+operational intelligence endpoints consumed by the React frontend.
 
-Run:
+Architecture
+────────────
+The backend follows a layered design:
+
+    routes (this module)  →  schemas (validation)  →  ml.py / auth.py
+    FastAPI app            Pydantic models           Business logic
+
+Endpoint Groups
+───────────────
+- /api/health       System health check
+- /api/auth/*       Authentication, registration, OTP verification
+- /api/kpis         Dashboard KPI summary from LSTM predictions
+- /api/forecast/*   LSTM conflict event forecasting per LGA
+- /api/map/*        Geospatial markers and transit corridors
+- /api/optimize     MILP supply chain optimizer with Monte Carlo
+- /api/ml/*         Feature sensitivity and model diagnostics
+- /api/telemetry    Runtime system metrics
+- /api/audit        Immutable audit trail
+
+Running Locally
+───────────────
     cd backend
     uvicorn main:app --reload --port 8000
 
-Docs:
-    http://localhost:8000/docs
+    API docs: http://localhost:8000/docs
+    ReDoc:    http://localhost:8000/redoc
+
+Production (Azure App Service)
+──────────────────────────────
+    gunicorn --bind=0.0.0.0:$PORT -k uvicorn.workers.UvicornWorker backend.main:app
+
+CORS
+────
+The middleware allows the deployed Azure Static Web Apps frontend and
+local development servers (Vite on ports 3000/5173).
 """
 from __future__ import annotations
 

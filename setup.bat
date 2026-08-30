@@ -55,9 +55,9 @@ if exist "frontend" (
 
 REM -- 4. Check data --
 echo [5/6] Checking data files...
-if not exist "data:" (
-    echo   WARNING: data:\ directory not found. Creating...
-    mkdir "data:"
+if not exist "data" (
+    echo   WARNING: data\ directory not found. Creating...
+    mkdir "data"
 )
 
 REM -- 5. Check model --

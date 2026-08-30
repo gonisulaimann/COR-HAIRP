@@ -2,6 +2,7 @@
   "name": "cor-harp-frontend",
   "private": true,
   "version": "1.0.0",
+  "description": "React frontend for the COR-HARP Humanitarian AI Resource Predictor",
   "type": "module",
   "scripts": {
     "dev": "vite",

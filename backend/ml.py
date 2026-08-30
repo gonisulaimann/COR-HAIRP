@@ -1,8 +1,35 @@
 """
-ml.py — ML inference layer for the COR-HARP FastAPI backend.
+COR-HARP ML Inference Layer
+===========================
 
-Wraps the existing train_lstm.py (LSTM model) and optimizer.py (MILP solver)
-to expose clean Python functions without Streamlit dependencies.
+Bridges the training pipeline (hairp_app/) with the FastAPI backend,
+providing clean inference functions without Streamlit dependencies.
+
+Components
+──────────
+- LSTM Forecasting: PyTorch LSTM (v1 or v2) for monthly conflict event prediction
+- MILP Optimizer: PuLP bi-objective supply chain solver with Monte Carlo simulation
+- Data Loading: Lazy-loading of humanitarian datasets from data/ directory
+
+Model Versioning
+────────────────
+The module auto-detects model versions (v2 preferred over v1):
+  - v2: BornoLSTMv2 (3-layer, 192 hidden, multi-head attention, 941K params)
+  - v1: BornoLSTM (2-layer, 128 hidden, 221K params)
+
+Data Directory
+──────────────
+Expects humanitarian datasets at <project-root>/data/:
+  - Conflict events (ACLED)
+  - Food prices (WFP)
+  - IPC food insecurity phases
+  - IDP camp populations (IOM DTM)
+
+Usage from backend/main.py
+──────────────────────────
+    from backend import ml
+    lga_params = ml.get_lga_params()
+    predictions = ml.multi_lga_predictions(lga_params)
 """
 from __future__ import annotations
 

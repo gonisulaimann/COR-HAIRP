@@ -1,61 +1,79 @@
-# ---------- OS ----------
+# ──────────────────────────────────────────────────────────────
+# COR-HARP — Git Ignore Configuration
+# ──────────────────────────────────────────────────────────────
+
+# ── Operating System Artifacts ──
 .DS_Store
 Thumbs.db
 Desktop.ini
+*.swp
+*.swo
+*~
 
-# ---------- AI Tool Configs ----------
+# ── IDE / Editor Configs ──
 .agents/
 .claude/
-.freebuff/
 .cursor/
 .vscode/
 .idea/
+*.code-workspace
 
-# ---------- Secrets & Environment ----------
+# ── Secrets & Environment ──
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 secrets.json
-.git-secret-replacements
 
-# ---------- Database ----------
+# ── Database Files ──
 *.db
 *.sqlite
 *.sqlite3
 
-# ---------- Python ----------
+# ── Python ──
 __pycache__/
 *.py[cod]
+*.pyo
 *.egg-info/
 dist/
 build/
+*.egg
 
-# ---------- Virtual Environments ----------
+# ── Virtual Environments ──
 .venv/
 venv/
+env/
+ENV/
 
-# ---------- Frontend ----------
+# ── Frontend ──
 frontend/node_modules/
 frontend/dist/
 
-# ---------- Deployment Artifacts ----------
+# ── Node (root-level, if any) ──
+node_modules/
+
+# ── Deployment Artifacts ──
 *.zip
 *.tar.gz
-deploy-*/
+deploy-/
 
-# ---------- Excel Temp Files ----------
+# ── Excel Temp Files ──
 ~$*
 
-# ---------- Large Data Files ----------
+# ── Large Binary Files ──
 *.gpkg
+*.pth
+*.onnx
 
-# ---------- Logs ----------
+# ── Logs & Cache ──
 *.log
 logs/
 tmp/
 .cache/
 
-
-# Legacy app virtual environment
+# ── Legacy ──
 hairp_app/venv/
+hairp_app/__pycache__/
+backend/__pycache__/
+.git-secret-replacements

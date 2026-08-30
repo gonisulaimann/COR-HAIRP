@@ -42,7 +42,7 @@ import torch
 # -- Path setup --
 APP_DIR = Path(__file__).resolve().parent
 ROOT_DIR = APP_DIR.parent
-DATA_DIR = ROOT_DIR / "data:"
+DATA_DIR = ROOT_DIR / "data"
 MODEL_DIR = APP_DIR / "models"
 MODEL_PATH = MODEL_DIR / "borno_lstm.pth"
 SCALER_PATH = MODEL_DIR / "borno_scaler.json"

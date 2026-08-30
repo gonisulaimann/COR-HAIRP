@@ -1,19 +1,31 @@
 /**
- * api.ts   TypeScript interfaces for every COR-HARP API response shape.
+ * API Type Definitions
+ * ════════════════════
  *
- * backend/schemas.py. If you change a response shape on the backend,
- * update the matching interface here so the frontend stays type-safe.
+ * TypeScript interfaces for every COR-HARP API response shape.
+ * These must stay in sync with backend/schemas.py — if a response
+ * shape changes on the backend, update the matching interface here.
+ *
+ * Type Convention
+ * ───────────────
+ * - Request interfaces:  {Name}Request  (POST body shapes)
+ * - Response interfaces: {Name}Response (what the API returns)
+ * - Entity interfaces:   {Name}         (individual data objects)
+ *
+ * Naming mirrors Pydantic model names in backend/schemas.py.
  */
 
-/* ── Auth ───────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   AUTHENTICATION
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/** POST /api/auth/login request body */
+/** POST /api/auth/login — credentials for authentication */
 export interface LoginRequest {
   email: string;
   password: string;
 }
 
-/** POST /api/auth/login response */
+/** POST /api/auth/login — session data on successful login */
 export interface LoginResponse {
   success: boolean;
   message: string;
@@ -23,26 +35,26 @@ export interface LoginResponse {
   has_seen_onboarding: boolean | null;
 }
 
-/** POST /api/auth/register request body */
+/** POST /api/auth/register — new account details */
 export interface RegisterRequest {
   name: string;
   email: string;
   password: string;
 }
 
-/** POST /api/auth/register response */
+/** POST /api/auth/register — confirmation that OTP was sent */
 export interface RegisterResponse {
   success: boolean;
   message: string;
 }
 
-/** POST /api/auth/verify-otp request body */
+/** POST /api/auth/verify-otp — OTP verification data */
 export interface VerifyOtpRequest {
   email: string;
   otp_code: string;
 }
 
-/** POST /api/auth/verify-otp response */
+/** POST /api/auth/verify-otp — result of OTP verification */
 export interface VerifyOtpResponse {
   success: boolean;
   message: string;
@@ -51,23 +63,23 @@ export interface VerifyOtpResponse {
   clearance: string | null;
 }
 
-/** POST /api/auth/forgot-password request body */
+/** POST /api/auth/forgot-password — password recovery request */
 export interface ForgotPasswordRequest {
   email: string;
 }
 
-/** POST /api/auth/forgot-password response */
+/** POST /api/auth/forgot-password — recovery confirmation */
 export interface ForgotPasswordResponse {
   success: boolean;
   message: string;
 }
 
-/** POST /api/auth/onboarding-complete request body */
+/** POST /api/auth/onboarding-complete — mark tour as seen */
 export interface OnboardingRequest {
   user_id: number;
 }
 
-/** GET /api/auth/users response item */
+/** GET /api/auth/users — user record for admin panel */
 export interface UserOut {
   id: number;
   name: string;
@@ -77,9 +89,11 @@ export interface UserOut {
   onboarded: boolean;
 }
 
-/* ── KPIs ───────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   DASHBOARD KPIs
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/** Single KPI card within the dashboard summary */
+/** Single KPI card (IDP count, risk index, etc.) */
 export interface KpiCard {
   label: string;
   value: string | number;
@@ -87,28 +101,30 @@ export interface KpiCard {
   delta_positive?: boolean | null;
 }
 
-/** GET /api/kpis response */
+/** GET /api/kpis — dashboard summary with all KPI cards */
 export interface KpiResponse {
   cards: KpiCard[];
   timestamp: string;
 }
 
-/* ── Forecast ───────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   LSTM FORECASTING
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/** POST /api/forecast/borno request body */
+/** POST /api/forecast/borno — forecast request parameters */
 export interface ForecastRequest {
   lga?: string;
   horizon?: number;
   escalation?: number;
 }
 
-/** A single month's LSTM prediction */
+/** Single month's predicted conflict events from the LSTM model */
 export interface ForecastPoint {
   month: number;
   predicted_events: number;
 }
 
-/** POST /api/forecast/borno response */
+/** POST /api/forecast/borno — LSTM forecast results */
 export interface ForecastResponse {
   lga: string;
   horizon: number;
@@ -116,9 +132,11 @@ export interface ForecastResponse {
   base_risk: number;
 }
 
-/* ── Map ────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   GEOSPATIAL DATA
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/** A single map marker (HQ, camp, conflict zone) */
+/** Map marker representing a region, camp, or conflict zone */
 export interface MapMarker {
   name: string;
   lat: number;
@@ -129,7 +147,7 @@ export interface MapMarker {
   lstm_prediction?: number | null;
 }
 
-/** A transit corridor line connecting two points */
+/** Transit corridor connecting two geographic points */
 export interface CorridorLine {
   name: string;
   coordinates: [number, number][];
@@ -137,22 +155,24 @@ export interface CorridorLine {
   risk_level: string;
 }
 
-/** GET /api/map/markers response */
+/** GET /api/map/markers — all markers and corridors */
 export interface MapMarkersResponse {
   markers: MapMarker[];
   corridors: CorridorLine[];
 }
 
-/* ── Optimizer ──────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   SUPPLY CHAIN OPTIMIZATION
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/** POST /api/optimize request body */
+/** POST /api/optimize — optimizer request parameters */
 export interface OptimizeRequest {
   n_periods?: number;
   equity_weight?: number;
   mc_iterations?: number;
 }
 
-/** POST /api/optimize response */
+/** POST /api/optimize — MILP optimizer results with optional Monte Carlo */
 export interface OptimizeResponse {
   status: string;
   total_cost: number;
@@ -165,9 +185,11 @@ export interface OptimizeResponse {
   mc_95_ci?: number[] | null;
 }
 
-/* ── Telemetry ──────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   SYSTEM & DIAGNOSTICS
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/** GET /api/telemetry response */
+/** GET /api/telemetry — runtime system metrics */
 export interface TelemetryResponse {
   session_uptime_s: number;
   data_pipeline_status: Record<string, string>;
@@ -175,9 +197,7 @@ export interface TelemetryResponse {
   system_stats: Record<string, unknown>;
 }
 
-/* ── Audit ──────────────────────────────────────────────────────────────── */
-
-/** A single audit trail entry */
+/** Single audit trail entry */
 export interface AuditEntry {
   timestamp: string;
   user_id: number;
@@ -187,24 +207,20 @@ export interface AuditEntry {
   integrity_hash: string;
 }
 
-/** GET /api/audit response */
+/** GET /api/audit — complete audit trail */
 export interface AuditResponse {
   entries: AuditEntry[];
   total: number;
 }
 
-/* ── Health ─────────────────────────────────────────────────────────────── */
-
-/** GET /api/health response */
+/** GET /api/health — service health check response */
 export interface HealthResponse {
   status: string;
   timestamp: string;
   version: string;
 }
 
-/* ── Sensitivity ────────────────────────────────────────────────────────── */
-
-/** Single feature sensitivity row from GET /api/ml/sensitivity */
+/** Single feature sensitivity row from perturbation analysis */
 export interface SensitivityRow {
   Feature: string;
   Sensitivity: number;

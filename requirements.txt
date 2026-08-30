@@ -1,17 +1,20 @@
-# COR-HARP Backend — Deployment Requirements
+# ──────────────────────────────────────────────────────────────
+# COR-HARP — Combined Backend Dependencies
+# Used for deployment (Azure Oryx reads this file)
+# ──────────────────────────────────────────────────────────────
 
-# Web framework
+# Web Framework
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
 gunicorn>=21.2.0
 
-# Config & secrets
+# Environment & Config
 python-dotenv>=1.0.0
 
-# System monitoring
+# System Monitoring
 psutil>=5.9.0
 
-# ML / Data pipeline
+# ML / Data Pipeline
 numpy>=1.24.0
 pandas>=2.0.0
 torch>=2.0.0
@@ -19,6 +22,6 @@ scikit-learn>=1.3.0
 pulp>=2.7.0
 openpyxl>=3.1.0
 
-# HTTP & email
+# HTTP & Email
 requests>=2.31.0
 sendgrid>=6.11.0

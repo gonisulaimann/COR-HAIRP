@@ -1,8 +1,34 @@
 """
-auth.py — User authentication and management for the COR-HARP API.
+COR-HARP Authentication Module
+==============================
 
-Uses SQLite for persistence, SHA-256 password hashing, and SendGrid OTP emails.
-Extracted from the Streamlit app.py to run independently.
+User registration, login, OTP email verification, and role-based access
+control for the COR-HARP platform.
+
+Storage
+───────
+- User accounts: SQLite database (hairp_app/users.db)
+- OTP codes: In-memory dictionary (resets on server restart)
+- Passwords: SHA-256 hashing (suitable for internal humanitarian tool)
+
+Authentication Flow
+───────────────────
+1. Login: email/password → SQLite lookup → session data
+2. Registration: email + password → SendGrid OTP → verify → create account
+3. Admin bypass: email='admin', password='admin' skips all checks
+
+Environment Variables (from hairp_app/.env)
+────────────────────────────────────────────
+- SENDGRID_API_KEY        SendGrid API key for OTP emails
+- SENDGRID_SENDER_EMAIL   From address for OTP emails
+- COR_HARP_DB_PATH        Override SQLite database location
+- OTP_EXPIRY_SECONDS      OTP validity window (default: 300)
+
+Production Notes
+────────────────
+- On Azure, the SQLite DB is at /home/site/wwwroot/hairp_app/users.db
+- SendGrid falls back to logging OTP codes if the SDK is unavailable
+- CORS middleware in main.py restricts access to allowed origins
 """
 from __future__ import annotations
 

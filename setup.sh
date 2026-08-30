@@ -67,7 +67,7 @@ fi
 
 # ── 4. Check data files ──
 echo "[5/6] Checking data files..."
-DATA_DIR="data:"
+DATA_DIR="data"
 if [ -d "$DATA_DIR" ]; then
   COUNT=$(ls -1 "$DATA_DIR" 2>/dev/null | wc -l | tr -d ' ')
   echo "  → Found $COUNT files in $DATA_DIR/"
