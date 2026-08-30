@@ -50,6 +50,7 @@ from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, HTTPException
 from .cors import RegexCORSMiddleware
+from .debug import router as debug_router
 
 from . import auth, ml
 from .schemas import (
@@ -121,6 +122,9 @@ app.add_middleware(
 def startup():
     auth.init_db()
 
+
+# ── Debug (TEMPORARY — remove before merging to production) ──────────────────
+app.include_router(debug_router)
 
 # ── Health ──────────────────────────────────────────────────────────────────
 
