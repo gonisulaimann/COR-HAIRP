@@ -55,7 +55,7 @@ from pulp import (
 # Constants
 # ---------------------------------------------------------------------------
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data:"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 TARGET_LGAS = ["Maiduguri", "Bama", "Monguno", "Ngala", "Konduga"]
 
 # Cost parameters (USD-equivalent per unit)

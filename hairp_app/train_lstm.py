@@ -34,7 +34,7 @@ warnings.filterwarnings("ignore")
 # Configuration
 # ---------------------------------------------------------------------------
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data:"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 MODEL_DIR = Path(__file__).resolve().parent / "models"
 MODEL_PATH = MODEL_DIR / "borno_lstm.pth"
 SCALER_PATH = MODEL_DIR / "borno_scaler.json"
