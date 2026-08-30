@@ -49,7 +49,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, HTTPException
-from .cors import RegexCORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 from . import auth, ml
 from .schemas import (
@@ -95,45 +95,31 @@ app = FastAPI(
 #   Production:  https://icy-river-0d05cf50f.7.azurestaticapps.net
 #   PR previews: https://icy-river-0d05cf50f-<N>.<region>.7.azurestaticapps.net
 #
-# We include both the static list AND a regex via RegexCORSMiddleware
+# We use the built-in allow_origin_regex on CORSMiddleware (Starlette 0.34+)
 # to cover all current and future PR preview domains.
 ALLOWED_ORIGINS = [
     # Production frontend
     "https://icy-river-0d05cf50f.7.azurestaticapps.net",
-    # PR preview (current — covered by regex too, but explicit for safety)
+    # PR preview (current — also matched by regex below)
     "https://icy-river-0d05cf50f-1.eastus2.7.azurestaticapps.net",
     # Local development
     "http://localhost:3000",
     "http://localhost:5173",
 ]
 
-# Matches all Azure SWA deployment URLs for this app.
+# Regex that matches ALL Azure SWA deployment URLs for this app:
+#   production:  icy-river-0d05cf50f.7.azurestaticapps.net
+#   PR preview:  icy-river-0d05cf50f-1.eastus2.7.azurestaticapps.net
 SWA_PREVIEW_REGEX = r"^https://icy-river-0d05cf50f(-\d+\.[a-z0-9]+)?\.7\.azurestaticapps\.net$"
 
-try:
-    app.add_middleware(
-        RegexCORSMiddleware,
-        allow_origins=ALLOWED_ORIGINS,
-        allow_origin_regex=SWA_PREVIEW_REGEX,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-except Exception as e:
-    # Fallback: if custom middleware fails, use standard CORS with explicit origins.
-    # This ensures the production frontend always works even if cors.py has issues.
-    import logging
-    logging.warning(f"RegexCORSMiddleware failed, falling back to standard: {e}")
-    from fastapi.middleware.cors import CORSMiddleware as StdCORSMiddleware
-    app.add_middleware(
-        StdCORSMiddleware,
-        allow_origins=ALLOWED_ORIGINS + [
-            "https://icy-river-0d05cf50f-1.eastus2.7.azurestaticapps.net",
-        ],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=SWA_PREVIEW_REGEX,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Initialize database on startup
 @app.on_event("startup")
