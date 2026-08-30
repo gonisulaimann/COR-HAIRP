@@ -50,7 +50,6 @@ from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, HTTPException
 from .cors import RegexCORSMiddleware
-from .debug import router as debug_router
 
 from . import auth, ml
 from .schemas import (
@@ -90,41 +89,57 @@ app = FastAPI(
 )
 
 # ── CORS ──────────────────────────────────────────────────────────────────
-# Uses a custom RegexCORSMiddleware (backend/cors.py) that extends
-# Starlette's CORSMiddleware with regex-based origin matching.
-# This handles Azure SWA's dynamic PR preview URLs, which change
-# with every pull request (e.g., -1.eastus2, -2.westus3, etc.).
+# Allow the deployed frontend, PR preview domains, and local dev servers.
 #
-# The static list covers production and localhost.
-# The regex covers all current and future PR preview domains.
+# Azure SWA generates a NEW preview URL for every PR:
+#   Production:  https://icy-river-0d05cf50f.7.azurestaticapps.net
+#   PR previews: https://icy-river-0d05cf50f-<N>.<region>.7.azurestaticapps.net
+#
+# We include both the static list AND a regex via RegexCORSMiddleware
+# to cover all current and future PR preview domains.
 ALLOWED_ORIGINS = [
+    # Production frontend
     "https://icy-river-0d05cf50f.7.azurestaticapps.net",
+    # PR preview (current — covered by regex too, but explicit for safety)
+    "https://icy-river-0d05cf50f-1.eastus2.7.azurestaticapps.net",
+    # Local development
     "http://localhost:3000",
     "http://localhost:5173",
 ]
 
-# Matches all Azure SWA deployment URLs for this app:
-#   Production:  https://icy-river-0d05cf50f.7.azurestaticapps.net
-#   PR previews: https://icy-river-0d05cf50f-<N>.<region>.7.azurestaticapps.net
+# Matches all Azure SWA deployment URLs for this app.
 SWA_PREVIEW_REGEX = r"^https://icy-river-0d05cf50f(-\d+\.[a-z0-9]+)?\.7\.azurestaticapps\.net$"
 
-app.add_middleware(
-    RegexCORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
-    allow_origin_regex=SWA_PREVIEW_REGEX,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+try:
+    app.add_middleware(
+        RegexCORSMiddleware,
+        allow_origins=ALLOWED_ORIGINS,
+        allow_origin_regex=SWA_PREVIEW_REGEX,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+except Exception as e:
+    # Fallback: if custom middleware fails, use standard CORS with explicit origins.
+    # This ensures the production frontend always works even if cors.py has issues.
+    import logging
+    logging.warning(f"RegexCORSMiddleware failed, falling back to standard: {e}")
+    from fastapi.middleware.cors import CORSMiddleware as StdCORSMiddleware
+    app.add_middleware(
+        StdCORSMiddleware,
+        allow_origins=ALLOWED_ORIGINS + [
+            "https://icy-river-0d05cf50f-1.eastus2.7.azurestaticapps.net",
+        ],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 # Initialize database on startup
 @app.on_event("startup")
 def startup():
     auth.init_db()
 
-
-# ── Debug (TEMPORARY — remove before merging to production) ──────────────────
-app.include_router(debug_router)
 
 # ── Health ──────────────────────────────────────────────────────────────────
 
