@@ -494,14 +494,14 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
             ═══════════════════════════════════════════════════════════════
             DEVELOPER PREVIEW MODE — NEVER ENABLE IN PRODUCTION
             ═══════════════════════════════════════════════════════════════
-            This button is ONLY visible when Vite runs in development mode
-            (import.meta.env.MODE === 'development'). The production Azure SWA
-            build always sets MODE='production', so this button never appears
-            in production. It exists solely so reviewers can test role-based
-            UI without needing a running backend.
+            This button is ONLY visible when the VITE_PREVIEW_MODE env var
+            is set to 'true' during build. The production Azure SWA build
+            (main branch) never sets this var. PR preview builds set it via
+            the SWA workflow so reviewers can test role-based UI without a
+            running backend. Also visible in local dev via vite.config.ts.
             ═══════════════════════════════════════════════════════════════
           */}
-          {import.meta.env.MODE !== "production" && (
+          {import.meta.env.VITE_PREVIEW_MODE === "true" && (
             <div className="mt-4">
               <button
                 type="button"
