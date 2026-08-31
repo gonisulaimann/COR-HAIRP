@@ -84,7 +84,7 @@ jobs:
       - name: Health check
         run: |
           echo "Waiting for backend to become healthy..."
-          for i in $(seq 1 15); do
+          for i in $(seq 1 15); do            # Use -o /dev/null to discard body; -w writes ONLY the status code to stdout
             STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "https://cor-harp-api.azurewebsites.net/api/health" 2>/dev/null)
             if [ "$STATUS" = "200" ]; then
               echo "Backend healthy (attempt $i)"
