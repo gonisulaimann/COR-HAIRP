@@ -91,7 +91,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
         setError(res.message || "Invalid credentials");
       }
     } catch {
-      setError("Connection failed   is the backend running?");
+      setError("Unable to reach the server. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -121,7 +121,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
         setMode("otp");
       } else setError(res.message);
     } catch {
-      setError("Connection failed   is the backend running?");
+      setError("Unable to reach the server. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -165,7 +165,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
       setSuccess(res.message);
       setTimeout(() => setMode("login"), 3000);
     } catch {
-      setError("Connection failed");
+      setError("Unable to reach the server. Please try again.");
     } finally {
       setLoading(false);
     }

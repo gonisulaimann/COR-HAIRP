@@ -43,7 +43,7 @@ export default function Dashboard({
         setForecastData(f);
         setSensitivity(s);
       } catch {
-        setError("Failed to load dashboard data. Is the backend running?");
+        setError("Unable to load dashboard data. The service may be temporarily unavailable.");
       } finally {
         setLoading(false);
       }
@@ -72,13 +72,10 @@ export default function Dashboard({
           {title}
         </h1>
         <GlassCard className="p-6 border-un-red/30 animate-fade-in">
-          <p className="font-semibold text-[#FCA5A5] mb-2">Connection Error</p>
+          <p className="font-semibold text-[#FCA5A5] mb-2">Service Unavailable</p>
           <p className="text-sm text-surface-400">{error}</p>
           <p className="text-xs text-surface-500 mt-3">
-            Run:{" "}
-            <code className="bg-dark-bg/50 px-1.5 py-0.5 rounded">
-              uvicorn backend.main:app --reload
-            </code>
+            Please try again in a moment. If the issue persists, contact your system administrator.
           </p>
         </GlassCard>
       </div>

@@ -7,7 +7,8 @@
  *   (3) Role set, onboarded → Sidebar + routed pages
  *
  * The sidebar menu is driven entirely by navigationConfig.ts,
- * filtered by the user's role and view mode (simple/advanced).
+ * filtered by the user's role and view mode (simple/advanced),
+ * and organized into labeled GROUPED SECTIONS (Bloomberg/Palantir pattern).
  * No hardcoded role checks in components.
  */
 import { useCallback, useState } from "react";
@@ -20,7 +21,7 @@ import {
 } from "react-router-dom";
 
 import { RoleProvider, useRole } from "@/contexts/RoleContext";
-import { getVisibleNav } from "@/config/navigationConfig";
+import { getGroupedNav } from "@/config/navigationConfig";
 
 import AlertBanner from "@/components/AlertBanner";
 import Copilot from "@/components/Copilot/Copilot";
@@ -39,6 +40,20 @@ import RoleSelectionPage from "@/pages/RoleSelectionPage/RoleSelectionPage";
 import ReportsPage from "@/pages/ReportsPage/ReportsPage";
 import MethodologyPage from "@/pages/MethodologyPage/MethodologyPage";
 import TeamPage from "@/pages/TeamPage/TeamPage";
+import AlertsPage from "@/pages/AlertsPage/AlertsPage";
+import BriefingPage from "@/pages/BriefingPage/BriefingPage";
+import TrendsPage from "@/pages/TrendsPage/TrendsPage";
+import LgaComparisonPage from "@/pages/LgaComparisonPage/LgaComparisonPage";
+import RiskOutlookPage from "@/pages/RiskOutlookPage/RiskOutlookPage";
+import RoutesPage from "@/pages/RoutesPage/RoutesPage";
+import InventoryPage from "@/pages/InventoryPage/InventoryPage";
+import SavedViewsPage from "@/pages/SavedViewsPage/SavedViewsPage";
+import ExportPage from "@/pages/ExportPage/ExportPage";
+import SearchPage from "@/pages/SearchPage/SearchPage";
+import ActivityLogPage from "@/pages/ActivityLogPage/ActivityLogPage";
+import DataExplorerPage from "@/pages/DataExplorerPage/DataExplorerPage";
+import InsightsPage from "@/pages/InsightsPage/InsightsPage";
+import SettingsPage from "@/pages/SettingsPage/SettingsPage";
 
 import bgImage from "../assets/login-signup-bg1.jpg";
 
@@ -100,27 +115,25 @@ function AuthenticatedApp({
     return <Onboarding onComplete={() => setOnboarded(true)} />;
   }
 
-  // Build sidebar items from navigation config, filtered by role and mode
-  const navItems = getVisibleNav(role, mode);
+  // Build sidebar items from grouped navigation config
+  const grouped = getGroupedNav(role, mode);
 
-  // Convert to sidebar format with tier separators
+  // Convert to sidebar format with tier separators per section
   const sidebarItems: ({ tier: string } | { id: string; label: string; icon: any; path: string })[] = [];
-  let lastTier = "";
-  for (const item of navItems) {
-    if (item.tier && item.tier !== lastTier) {
-      sidebarItems.push({ tier: item.tier });
-      lastTier = item.tier;
+  for (const group of grouped) {
+    sidebarItems.push({ tier: group.section.label });
+    for (const item of group.items) {
+      const displayLabel =
+        mode === "advanced" && item.advancedLabel
+          ? item.advancedLabel
+          : item.label;
+      sidebarItems.push({
+        id: item.id,
+        label: displayLabel,
+        icon: item.icon,
+        path: item.path,
+      });
     }
-    // In simple mode, show the simple label; in advanced, show advancedLabel
-    const displayLabel = mode === "advanced" && item.advancedLabel
-      ? item.advancedLabel
-      : item.label;
-    sidebarItems.push({
-      id: item.id,
-      label: displayLabel,
-      icon: item.icon,
-      path: item.path,
-    });
   }
 
   return (
@@ -148,13 +161,27 @@ function AuthenticatedApp({
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/map" element={<MapView />} />
+          <Route path="/alerts" element={<AlertsPage />} />
+          <Route path="/briefing" element={<BriefingPage />} />
           <Route path="/forecast" element={<ForecastPage />} />
+          <Route path="/trends" element={<TrendsPage />} />
+          <Route path="/lga-comparison" element={<LgaComparisonPage />} />
+          <Route path="/risk-outlook" element={<RiskOutlookPage />} />
           <Route path="/optimizer" element={<OptimizerPage />} />
-          <Route path="/reports" element={<ReportsPage />} />
-          <Route path="/methodology" element={<MethodologyPage />} />
-          <Route path="/team" element={<TeamPage />} />
+          <Route path="/routes" element={<RoutesPage />} />
+          <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/copilot" element={<Dashboard title="AI Copilot" />} />
+          <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/saved-views" element={<SavedViewsPage />} />
+          <Route path="/export" element={<ExportPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/team" element={<TeamPage />} />
+          <Route path="/activity-log" element={<ActivityLogPage />} />
+          <Route path="/methodology" element={<MethodologyPage />} />
+          <Route path="/data-explorer" element={<DataExplorerPage />} />
+          <Route path="/insights" element={<InsightsPage />} />
           <Route path="/telemetry" element={<Dashboard title="System Telemetry & Diagnostics" />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </main>
 
