@@ -490,6 +490,39 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
             </form>
           )}
 
+          {/*
+            ═══════════════════════════════════════════════════════════════
+            DEVELOPER PREVIEW MODE — NEVER ENABLE IN PRODUCTION
+            ═══════════════════════════════════════════════════════════════
+            This button is ONLY visible when the VITE_PREVIEW_MODE env var
+            is set to 'true' during build. The production Azure SWA build
+            (main branch) never sets this var. PR preview builds set it via
+            the SWA workflow so reviewers can test role-based UI without a
+            running backend. Also visible in local dev via vite.config.ts.
+            ═══════════════════════════════════════════════════════════════
+          */}
+          {import.meta.env.VITE_PREVIEW_MODE === "true" && (
+            <div className="mt-4">
+              <button
+                type="button"
+                onClick={() =>
+                  onLogin({
+                    id: 999,
+                    name: "Preview User",
+                    clearance: "admin",
+                    has_seen_onboarding: false,
+                  })
+                }
+                className="w-full py-2.5 rounded-card border border-dashed border-amber-500/40 bg-amber-500/5 text-amber-400 text-[0.8rem] font-medium hover:bg-amber-500/10 transition-colors"
+              >
+                ⚡ Preview Mode — Skip Login
+              </button>
+              <p className="text-[0.6rem] text-amber-500/50 text-center mt-1.5">
+                Dev only · never appears in production builds
+              </p>
+            </div>
+          )}
+
           {/* Footer */}
           <div className="mt-10 pt-5 border-t border-white/[0.04] text-center">
             <p className="text-[0.6rem] text-surface-500/60 leading-relaxed">
