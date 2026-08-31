@@ -77,3 +77,4 @@ hairp_app/venv/
 hairp_app/__pycache__/
 backend/__pycache__/
 .git-secret-replacements
+
